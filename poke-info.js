@@ -70,9 +70,6 @@ const renderPokemon = (poke) => {
     const pokeInfo = `
     <h1>${poke.id}: ${poke.name.toUpperCase()}</h1>
     <img src="${poke.sprites.front_default}" alt="This is a front image of ${poke.name}">
-    <img src="${poke.sprites.back_default}" alt="This is a back image of ${poke.name}">
-    <img src="${poke.sprites.front_shiny}" alt="This is a front image of ${poke.name}">
-    <img src="${poke.sprites.back_shiny}" alt="This is a front image of ${poke.name}">
     <p>Weight: ${poke.weight} | Height: ${poke.height}</p>
     <ul id="ability-items"></ul>
     `;
