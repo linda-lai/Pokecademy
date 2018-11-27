@@ -107,4 +107,4 @@ const fetchInfo = () => {
       .catch(error => console.error(error));
 }
 
-// fetchInfo();
+fetchInfo();
