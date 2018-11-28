@@ -1,3 +1,5 @@
+
+
 // BUILDING AN API USING EXPRESS
 const express = require('express');
 const app = express();
@@ -20,11 +22,18 @@ const pokemon = [
     }
 ];
 
-// Uses middleware to allow access to the data for our request
+// app = {
+//     key: "value",
+//     get: function(path, cb) {
+//         kjgdsjgdkjhgsjgdj
+//     }
+// }
+
+// Uses middleware to allow access to the data for our request - gives the ability to read the body of the request
 app.use(express.json());
 
-// Calling .get function
-app.get('/', (req, res) => {
+// Calling .get function - sets up a route for root
+app.get('/', function(req, res) {
     return res.send('Hello world. From API!');
 });
 
@@ -52,8 +61,23 @@ app.get('/pokemon/:id', (req, res) => {
     return res.send(poke);
 });
 
+app.put('/pokemon/:id', (req, res) => {
+    // TO DO: Implement a PUT endpoint to update a Pokemon in the array
+    // 1. Check the array for the Pokemon
+    // Grabs the id out of params, converts to integer, needs to match number and data type
+    const id = parseInt(req.params.id);
+    const poke = pokemon.find(p => p.id === id);
+    // 2. Validate what the user should give us
+    // Get new params from request body
+    const name = req.body.name
+    // 3. Update the record
+    // Send back Pokemon as the response
+    poke.name = name;
+    return res.send(poke);
+});
+
+// TO ADD A NEW POKEMON TO OUR ARRAY
 app.post('/pokemon', (req, res) => {
-    // ADD A NEW POKEMON TO OUR ARRAY
     // 1. Get new params from request body
     const id = req.body.id
     const name = req.body.name
