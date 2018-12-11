@@ -1,4 +1,3 @@
-// ALL POKEMON (http://127.0.0.1:5500/)
 // RENDER POKEMON IN HTML/APPEND DOM NODE
 const renderPokemon = (pokemon) => {
     // Targets empty <div> with id="pokemon-list"
