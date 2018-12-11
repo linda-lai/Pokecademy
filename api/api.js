@@ -9,9 +9,6 @@ const Joi = require('joi');
 // a function that produces an object is a 'factory' function
 const app = express();
 
-// req = input
-// res = output
-
 const pokemon = [
     {
         id: 1,
@@ -27,14 +24,6 @@ const pokemon = [
     }
 ];
 
-// INBUILT METHODS IN THE EXPRESS OBJECT:
-// app = {
-//     key: "value",
-//     get: function(path, cb) {
-//         blahblahblah...placeholderfunction
-//     }
-// }
-
 // MIDDLEWARE
 // Uses middleware to allow access to the data for our request - gives the ability to read the body of the request
 app.use(express.json());
@@ -47,8 +36,7 @@ app.get('/', function(req, res) {
 
 // 'GET': TO SHOW ALL POKEMON IN THE ARRAY at '/pokemon'
 // Like Pokemon.all in Rails => API will return all Pokemon saved in the 'pokemon' array as a JSON object
-// Unlike Rails, method can access a variable outside of it 'pokemon'
-// get '/pokemon' to controller#action
+// Unlike Rails, method can access a variable outside of it 'pokemon', get '/pokemon' to controller#action
 app.get('/pokemon', (req, res) => {
     return res.send(pokemon);
 });
@@ -73,7 +61,6 @@ app.get('/pokemon/:id', (req, res) => {
 
 // 'POST': TO ADD A NEW POKEMON TO OUR ARRAY at '/pokemon'
 app.post('/pokemon', (req, res) => {
-    // TO-DO ADD A NEW POKEMON TO OUR ARRAY
     // 1. Get new params from request body
     const id = req.body.id;
     const name = req.body.name;
