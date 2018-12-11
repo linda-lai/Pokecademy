@@ -1,15 +1,17 @@
 # Pokecademy
-Using ![PokéAPI](https://github.com/PokeAPI) (a RESTful Pokémon API) to practice Fetch in JavaScript...and catch 'em all.
+Using ![PokéAPI](https://github.com/PokeAPI) (a RESTful Pokémon API) to practice the Fetch API in JavaScript...and catch 'em all.
 
 [![PokéAPI](/assets/pokeapi.png)](https://pokeapi.co/)
 
 ## Fetch API
+Using the Fetch API to contact external resources and grab data from another database.
+
 ### ('/')
 The simplest use of `fetch()` takes one argument — the path to the resource you want to fetch — and returns a promise containing the response (a Response object).
 
 This is just an HTTP response, not the actual JSON. To extract the JSON body content from the response, we use the `json()` method (defined on the Body mixin, which is implemented by both the Request and Response objects).
 
-1. In `index.html` file, create an empty <div> with a meaningful name to populate with data from the API.
+In `index.html` file, create an empty <div> with a meaningful name to populate with data from the API.
    ```html
    <h1>Pokemon List</h1>
     <div id="pokemon-list"></div>
@@ -17,7 +19,7 @@ This is just an HTTP response, not the actual JSON. To extract the JSON body con
     <script src="index.js"></script>
    ```
    
-2. In `index.js` file, create a new Fetch API request using `fetch()`:
+In `index.js` file, create a new Fetch API request using `fetch()`:
    ```js
    const url = 'https://pokeapi.co/api/v2/pokemon/';
 
@@ -41,15 +43,15 @@ This is just an HTTP response, not the actual JSON. To extract the JSON body con
    If successful, the API will return stringified version of the JSON object.
 
 ### ('/:id')
-3. In `poke-info.html` file...
+In `poke-info.html` file...
    ```html
        <div id="poke-info" class="page-container">
        </div>
     
     <script src="poke-info.js"></script>
    ```
-4. In `poke-info.js` file...
 
+In `poke-info.js` file...
    ```js
     // To render 'abilities' from Pokemon array object
     const renderAbilities = (poke) => {
@@ -110,4 +112,3 @@ This is just an HTTP response, not the actual JSON. To extract the JSON body con
     
     fetchInfo();
    ```
-5. 
