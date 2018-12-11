@@ -1,4 +1,6 @@
 // BUILDING AN API USING EXPRESS
+
+// DEPENDENCIES
 // Express is a factory function
 const express = require('express');
 // Require in Joi to add validations, it will return an instance that can be used straight away
@@ -25,6 +27,7 @@ const pokemon = [
     }
 ];
 
+// INBUILT METHODS IN THE EXPRESS OBJECT:
 // app = {
 //     key: "value",
 //     get: function(path, cb) {
@@ -32,16 +35,17 @@ const pokemon = [
 //     }
 // }
 
+// MIDDLEWARE
 // Uses middleware to allow access to the data for our request - gives the ability to read the body of the request
 app.use(express.json());
 
-// TO SET A ROUTE FOR THE ROOT /
+// 'GET': TO SET A ROUTE FOR THE ROOT at '/'
 // Calling .get function - sets up a route for root
 app.get('/', function(req, res) {
     return res.send('Hello world. From API!');
 });
 
-// TO SHOW ALL POKEMON IN THE ARRAY
+// 'GET': TO SHOW ALL POKEMON IN THE ARRAY at '/pokemon'
 // Like Pokemon.all in Rails => API will return all Pokemon saved in the 'pokemon' array as a JSON object
 // Unlike Rails, method can access a variable outside of it 'pokemon'
 // get '/pokemon' to controller#action
@@ -49,8 +53,8 @@ app.get('/pokemon', (req, res) => {
     return res.send(pokemon);
 });
 
-// TO SHOW AN INDIVIDUAL POKEMON IN THE ARRAY
-// TODO :id is a variable we can access to determine which Poke to send back
+// 'GET': TO SHOW AN INDIVIDUAL POKEMON IN THE ARRAY at '/pokemon/:id'
+// :id is a variable we can access to determine which Poke to send back
 app.get('/pokemon/:id', (req, res) => {
     // console.log(req.params.id);
     // Grabs the id out of params, converts to integer
@@ -67,7 +71,7 @@ app.get('/pokemon/:id', (req, res) => {
     return res.send(poke);
 });
 
-// TO ADD A NEW POKEMON TO OUR ARRAY
+// 'POST': TO ADD A NEW POKEMON TO OUR ARRAY at '/pokemon'
 app.post('/pokemon', (req, res) => {
     // TO-DO ADD A NEW POKEMON TO OUR ARRAY
     // 1. Get new params from request body
@@ -80,9 +84,9 @@ app.post('/pokemon', (req, res) => {
     return res.send(poke);
 });
 
-// TO UPDATE AN EXISTING POKEMON IN THE ARRAY
+// 'PUT': TO UPDATE AN EXISTING POKEMON IN THE ARRAY at '/pokemon/:id'
+// Implement a PUT endpoint to update a Pokemon in the array
 app.put('/pokemon/:id', (req, res) => {
-    // TODO: Implement a PUT endpoint to update a Pokemon in the array
     // 1. Check the array for the Pokemon
     // Grabs the id out of params, converts to integer, needs to match number and data type
     const id = parseInt(req.params.id);
@@ -113,8 +117,7 @@ app.put('/pokemon/:id', (req, res) => {
     return res.send(poke);
 });
 
-
-// TO DELETE A POKEMON FROM THE ARRAY
+// 'DELETE': TO DELETE A POKEMON FROM THE ARRAY at /pokemon/:id
 app.delete('/pokemon/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const poke = pokemon.find(p => p.id === id);
