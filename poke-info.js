@@ -1,12 +1,10 @@
-// To renderAbilities() from Pokemon array object
-// Solution #1: renderAbilities
+// To render 'abilities' from Pokemon array object
 const renderAbilities = (poke) => {
     // Creates a panel variable to select empty poke-info <div> by id
     const panel = document.querySelector('#poke-info');
-    
     // Creates a ul variable to create a new <ul> with abilities id
     const ul = `<ul id="abilities"></ul>`;
-    
+
     // insertAdjacentHTML() method inserts a text as HTML, into a specified position
     // 'beforehand' pushes text before the end of the element (as the last child)
     panel.insertAdjacentHTML('beforeend', ul);
@@ -23,19 +21,7 @@ const renderAbilities = (poke) => {
     ulHeader.insertAdjacentHTML('beforebegin', `<h2>Abilities<h2>`)
 }
 
-/*
-// Solution #2: renderAbilities
-const renderAbilities = (poke) => {
-    const list = document.querySelector("#ability-items")
-    poke.abilities.forEach(function(ability) {
-        listItem = document.createElement('li')   
-        listItem.innerText = ability.ability.name
-        list.append(listItem)
-    })
-}
-*/
-
-// To renderMoves() from Pokemon array object
+// To render 'moves' from Pokemon array object
 const renderMoves = (poke) => {
     // Creates a panel variable to select empty poke-info <div> by id
     const panel = document.querySelector('#poke-info');
@@ -60,6 +46,7 @@ const renderMoves = (poke) => {
 
 }
 
+// To render Pokemon on /:id page with pokeInfo, renderAbilities and renderMoves
 const renderPokemon = (poke) => {
     console.log(poke)
 
@@ -78,9 +65,6 @@ const renderPokemon = (poke) => {
     // 'beforehand' pushes text before the end of the element (as the last child)
     panel.insertAdjacentHTML('beforeend', pokeInfo);
 
-    // // invokes the renderAbilities method - using John's solution
-    // renderAbilities(poke)
-
     // invokes the renderAbilities method - using my solution
     renderAbilities(poke)
     renderMoves(poke)
@@ -88,10 +72,14 @@ const renderPokemon = (poke) => {
     // Displays the entire JSON object returned by fetch in console.log
     console.log(poke)
 }
-  
+
+// To search :id parameter to Pokemon object :id
 const getId = () => {
     // The window.location object is used to get the current page address (URL) and redirect the browser to a new page
+    // The search property sets or returns the querystring part of a URL
+    // The querystring part is the part of the URL after the question mark (?); often used for parameter passing
     const queryParams = window.location.search;
+    // Returns params including and after "?", e.g. ?72, .substr slices off first
     const id = queryParams.substr(1);
     return id;
 }
@@ -107,4 +95,4 @@ const fetchInfo = () => {
       .catch(error => console.error(error));
 }
 
-// fetchInfo();
+fetchInfo();
