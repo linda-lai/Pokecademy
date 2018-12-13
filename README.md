@@ -140,7 +140,7 @@ Install Express as a dependency, this will create `nodule_modules/` folder and o
 
 ```terminal
 npm install express --save
-``
+```
 
 As entry point is set to `app.js`, this will be the initialiser for the function. Include Express library by calling it in using `'require'`, searches `node_modules/` folder and Express returns a function which we can call to create a new instance of an Express app:
 

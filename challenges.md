@@ -1,8 +1,7 @@
-# Pokemon Academy
+# Challenges: Pokemon Academy
 Challenges for Term 2, Week 7.
 
-## Monday
-### Challenge
+## Monday Challenge
 Display the following on the `poke-info.html` page:
 
 - the pokemon's id
@@ -13,8 +12,7 @@ Display the following on the `poke-info.html` page:
 - display an image of the pokemon (this property will exist somewhere on the response object returned from `https://pokeapi.co/api/v2/pokemon/:id`)
 - use CSS or Bootstrap to add some nice styling to the pages
 
-## Tuesday
-### Challenge
+## Tuesday Challenge
 Write routes for:
 1. PUT/PATCH: /pokemon/:id
 2. DELETE: /pokemon/:id
@@ -23,8 +21,7 @@ Write routes for:
 1. A route to search for a name
 2. Saving the data to a JSON file (edited)
 
-## Thursday
-### Challenge
+## Thursday Challenge
 
 - Implement a new database and collection for yesterday's todo challenge
 - Practice using the Mongo CLI to:
