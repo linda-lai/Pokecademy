@@ -171,3 +171,132 @@ To run `api.js`:
 ```
 $ node app.js
 ```
+
+### MongoDB
+
+#### Compared to Relational Databases
+Relational DB | Mongo DB
+--------------|--------------
+Databases     | Database
+Tables        | Collections
+Records (Rows)| Documents
+
+Relational databases are usually based on relationships between tables; in contrast, in Mongo relationships between collections and documents are managed manually (in embedded relationships, or in two separate documents)
+
+```terminal
+$ brew update
+$ brew install mongodb
+```
+Use sudo to make directory, set permissions for new folder, will go through recursively and change permission owner to user:
+
+```
+sudo mkdir -p /data/db
+sudo chown -R `id -un` /data/db
+```
+
+In a new Terminal window, run the Mongo daemon in one tab:
+```
+$ mongod
+```
+
+At some point in the Terminal output, the below will indicate if the server port is running and listening for requests:
+```
+2018-12-12T02:20:27.954+1100 I NETWORK  [initandlisten] waiting for connections on port 27017
+```
+
+Then in another tab, connect to the Mongo daemon:
+```
+$ mongo
+```
+
+If it is showing with arrow cursor, it's connected from the previous Terminal window, so we can now send commands to the Mongo database.
+
+There is now a client in one tab and a server on the other.
+
+#### Mongo Commands
+To show all databases:
+```
+$ show dbs
+```
+
+To create a new database (the document won't be created until an entry has been made):
+```
+$ use [database-name]
+```
+
+To create a new collection:
+```
+$ db.createCollection('[NAME]')
+```
+
+To show collections:
+```
+$ show collections
+```
+
+If needed, to drop a database:
+```
+$ db.moves.drop()
+```
+
+To insert an object (or any kind of ON structure) into the database:
+```
+db.pokemon.insert({name: 'Bulbasaur'})
+db.pokemon.insert([ { name: 'Charmander'}, { name: 'Charmeleon'}, ])
+```
+
+Will display an entry, or all entries in the database:
+```
+db.pokemon.find({})
+db.pokemon.find({name: 'Ivasaur'})
+
+// Returns a cursor - like an array of objects 
+db.pokemon.find({weight: '5lb'})
+
+// Convert to array and find values like a usual array
+db.pokemon.find({weight: "5lb"}).toArray()[0].name
+```
+
+To update an existing record:
+```
+db.pokemon.update({name: 'Bulbasaur'}, {name: 'BUBLESAUR'})
+
+// However, the below must be specified otherwise it will replace all the existing values of the object with the new entry
+db.pokemon.update({name: 'Ivasaur'}, {$set: {name: 'IVYSAUR'}})
+```
+
+To update many database entries:
+```
+db.pokemon.updateMany({}, {$set: {admin: false}})
+```
+
+To remove:
+```
+// A single entry
+db.pokemon.remove({name: "BUBLESAUR"})
+
+// The entire collection
+db.pokemon.remove({})
+```
+
+To import a JSON file:
+```
+--jsonArray --db pokedex --collection pokemon --file pokemon.json
+```
+
+Creating many to many relationships between tables:
+
+```
+db.pokemon.insert([{name: 'Pidgey', moves: []}, {name: 'Weedle', moves: []}, {name: 'Harrison}])
+
+let tackle = db.moves.findOne({name: 'tackle'})
+tackle._id
+
+let bite = db.moves.findOne({name: 'bite})
+bite._id
+
+db.pokemon.update({name: 'Pidgey'}, {$set: {moves: [tackle._id, bite._id]}})
+db.pokemon.update({name: 'Harrison', {$set: {moves: [bite._id]}}})
+
+db.pokemon.find({moves: bite._id})
+```
