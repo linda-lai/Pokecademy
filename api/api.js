@@ -116,7 +116,7 @@ app.delete('/pokemon/:id', (req, res) => {
     return res.send(poke);
 });
 
-// Tell API to listen to a specific port
+// PORT
 app.listen(5000, () => {
     console.log("Listening on port 5000");
 });

@@ -1,5 +1,5 @@
 # Pokecademy
-Using ![PokéAPI](https://github.com/PokeAPI) (a RESTful Pokémon API) to practice the Fetch, Express and React in JavaScript...and catch 'em all.
+Using [PokéAPI](https://github.com/PokeAPI) (a RESTful Pokémon API) to practice the Fetch, Express and React in JavaScript...and catch 'em all.
 
 [![PokéAPI](/client/assets/pokeapi.png)](https://pokeapi.co/)
 
