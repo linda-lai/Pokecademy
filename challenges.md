@@ -1,4 +1,4 @@
-# Challenges: Pokemon Academy
+# Pokemon Academy Challenges
 Challenges for Term 2, Week 7.
 
 ## Monday Challenge
@@ -22,7 +22,6 @@ Write routes for:
 2. Saving the data to a JSON file (edited)
 
 ## Thursday Challenge
-
 - Implement a new database and collection for yesterday's todo challenge
 - Practice using the Mongo CLI to:
   - create new todos

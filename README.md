@@ -1,7 +1,7 @@
 # Pokecademy
-Using ![PokéAPI](https://github.com/PokeAPI) (a RESTful Pokémon API) to practice the Fetch API in JavaScript...and catch 'em all.
+Using ![PokéAPI](https://github.com/PokeAPI) (a RESTful Pokémon API) to practice the Fetch, Express and React in JavaScript...and catch 'em all.
 
-[![PokéAPI](/assets/pokeapi.png)](https://pokeapi.co/)
+[![PokéAPI](/client/assets/pokeapi.png)](https://pokeapi.co/)
 
 ## Fetch API
 Using the Fetch API to contact external resources and grab data from another database.
@@ -190,8 +190,8 @@ $ brew install mongodb
 Use sudo to make directory, set permissions for new folder, will go through recursively and change permission owner to user:
 
 ```
-sudo mkdir -p /data/db
-sudo chown -R `id -un` /data/db
+$ sudo mkdir -p /data/db
+$ sudo chown -R `id -un` /data/db
 ```
 
 In a new Terminal window, run the Mongo daemon in one tab:
@@ -241,62 +241,64 @@ $ db.moves.drop()
 
 To insert an object (or any kind of ON structure) into the database:
 ```
-db.pokemon.insert({name: 'Bulbasaur'})
-db.pokemon.insert([ { name: 'Charmander'}, { name: 'Charmeleon'}, ])
+$ db.pokemon.insert({name: 'Bulbasaur'})
+$ db.pokemon.insert([ { name: 'Charmander'}, { name: 'Charmeleon'}, ])
 ```
 
 Will display an entry, or all entries in the database:
 ```
-db.pokemon.find({})
-db.pokemon.find({name: 'Ivasaur'})
+$ db.pokemon.find({})
+$ db.pokemon.find({name: 'Ivasaur'})
 
 // Returns a cursor - like an array of objects 
-db.pokemon.find({weight: '5lb'})
+$ db.pokemon.find({weight: '5lb'})
 
 // Convert to array and find values like a usual array
-db.pokemon.find({weight: "5lb"}).toArray()[0].name
+$ db.pokemon.find({weight: "5lb"}).toArray()[0].name
 ```
 
 To update an existing record:
 ```
-db.pokemon.update({name: 'Bulbasaur'}, {name: 'BUBLESAUR'})
+$ db.pokemon.update({name: 'Bulbasaur'}, {name: 'BUBLESAUR'})
 
-// However, the below must be specified otherwise it will replace all the existing values of the object with the new entry
-db.pokemon.update({name: 'Ivasaur'}, {$set: {name: 'IVYSAUR'}})
+// However, the below must be specified with {$set}
+// Otherwise, it will replace all the existing values of the object with the new entry
+$ db.pokemon.update({name: 'Ivasaur'}, {$set: {name: 'IVYSAUR'}})
 ```
 
 To update many database entries:
 ```
-db.pokemon.updateMany({}, {$set: {admin: false}})
+$ db.pokemon.updateMany({}, {$set: {admin: false}})
 ```
 
 To remove:
 ```
 // A single entry
-db.pokemon.remove({name: "BUBLESAUR"})
+$ db.pokemon.remove({name: "BUBLESAUR"})
 
 // The entire collection
-db.pokemon.remove({})
+$ db.pokemon.remove({})
 ```
 
 To import a JSON file:
 ```
---jsonArray --db pokedex --collection pokemon --file pokemon.json
+$ --jsonArray --db pokedex --collection pokemon --file pokemon.json
 ```
 
 Creating many to many relationships between tables:
 
 ```
-db.pokemon.insert([{name: 'Pidgey', moves: []}, {name: 'Weedle', moves: []}, {name: 'Harrison}])
+$ db.pokemon.insert([{name: 'Pidgey', moves: []}, {name: 'Weedle', moves: []}, {name: 'Harrison}])
 
-let tackle = db.moves.findOne({name: 'tackle'})
+$ let tackle = db.moves.findOne({name: 'tackle'})
 tackle._id
 
-let bite = db.moves.findOne({name: 'bite})
+$ let bite = db.moves.findOne({name: 'bite})
 bite._id
 
-db.pokemon.update({name: 'Pidgey'}, {$set: {moves: [tackle._id, bite._id]}})
-db.pokemon.update({name: 'Harrison', {$set: {moves: [bite._id]}}})
+$ db.pokemon.update({name: 'Pidgey'}, {$set: {moves: [tackle._id, bite._id]}})
 
-db.pokemon.find({moves: bite._id})
+$ db.pokemon.update({name: 'Harrison', {$set: {moves: [bite._id]}}})
+
+$ db.pokemon.find({moves: bite._id})
 ```
