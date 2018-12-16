@@ -14,12 +14,13 @@ app.use(express.json());
 
 // 'GET': TO SET A ROUTE FOR THE ROOT at '/'
 app.get('/', function(req, res) {
-    return res.send('Hello world. From the Poke MongoDB/Express API!');
+    return res.send('Hello world. From the Pokemon Mongoose/Express API!');
 });
 
 // 'GET': TO SHOW ALL POKEMON IN THE ARRAY at '/pokemon'
 app.get('/pokemon', (req, res) => {
-    return res.send(pokemon);
+  Pokemon.find({})
+    .then(docs => res.send(docs));
 });
 
 // 'GET': TO SHOW AN INDIVIDUAL POKEMON IN THE ARRAY at '/pokemon/:id'
