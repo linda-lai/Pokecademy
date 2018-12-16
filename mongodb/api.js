@@ -3,10 +3,12 @@
 // DEPENDENCIES
 const express = require('express');
 const Joi = require('joi');
-const app = express();
+const mongoose = require('mongoose')
 
-// 'DATABASE'
+mongoose.connect('mongodb://localhost:27017/pokedex');
 
+const app = new express();
+const port = process.env.PORT || 5000;
 // MIDDLEWARE
 app.use(express.json());
 
@@ -72,6 +74,6 @@ app.delete('/pokemon/:id', (req, res) => {
 });
 
 // PORT
-app.listen(5000, () => {
-    console.log("Listening on port 5000");
-});
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
+  })
