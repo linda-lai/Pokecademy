@@ -3,78 +3,89 @@
 // DEPENDENCIES
 const express = require('express');
 const Joi = require('joi');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/pokedex');
+// MONGOOSE
+mongoose.connect('mongodb://localhost:27017/mongoose');
+const Pokemon = require('./models/Pokemon');
 
+// APP INSTANCE & ENVIRONMENT VARIABLES
 const app = new express();
 const port = process.env.PORT || 5000;
+
 // MIDDLEWARE
 app.use(express.json());
 
-// 'GET': TO SET A ROUTE FOR THE ROOT at '/'
+// ROUTES
+// 'GET': TO SET A ROUTE FOR THE ROOT @ '/'
 app.get('/', function(req, res) {
     return res.send('Hello world. From the Pokemon Mongoose/Express API!');
 });
 
-// 'GET': TO SHOW ALL POKEMON IN THE ARRAY at '/pokemon'
+// 'GET': TO SHOW ALL POKEMON IN THE ARRAY @ '/pokemon'
 app.get('/pokemon', (req, res) => {
-  Pokemon.find({})
-    .then(docs => res.send(docs));
+    // Select all Pokemon from the model, query syntax and methods similar to Mongo CLI
+    // Returns a promise (as it needs to connect to database and executes asynchronously)
+    Pokemon.find({})
+    // Send a response, passed a callback for when 'docs' is returned/promise is fulfilled
+        .then(docs => res.send(docs));
 });
 
-// 'GET': TO SHOW AN INDIVIDUAL POKEMON IN THE ARRAY at '/pokemon/:id'
+// 'GET': TO SHOW AN INDIVIDUAL POKEMON IN THE ARRAY @ '/pokemon/:id'
 app.get('/pokemon/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const poke = pokemon.find(p => p.id === id);
-    if (!poke) {
-        return res.send('Pokemon not found!');
-    }
-    return res.send(poke);
+    const { id } = req.params; // OR const id = parseInt(req.params.id);
+    Pokemon.findOne({id}) // OR Pokemon.find({id: id}) (can be shortened if key and value are identical)
+        .then(doc => res.send(doc));
 });
 
 // 'POST': TO ADD A NEW POKEMON TO OUR ARRAY at '/pokemon'
 app.post('/pokemon', (req, res) => {
-    const id = req.body.id;
-    const name = req.body.name;
-    const poke = { id: id, name: name};
-    pokemon.push(poke);
-    return res.send(poke);
+    // Grab the values from the request body
+    const { id, name } = req.body;
+    // Create new Pokemon document
+    const newPokemon = new Pokemon({ id, name });
+    // Save in MongoDB - send request
+    newPokemon.save()
+        .then(doc => res.send(doc));
 });
 
 // 'PUT': TO UPDATE AN EXISTING POKEMON IN THE ARRAY at '/pokemon/:id'
 app.put('/pokemon/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const poke = pokemon.find(p => p.id === id);
-    if (!poke) {
-        return res.status(404).send('Pokemon not found!');
-      }
-    const schema = {
-        name: Joi.string().min(3).required()
-    }
-    const valid = Joi.validate(req.body, schema);
-    const error = valid.error
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
-    const name = req.body.name;
-    poke.name = name;
-    return res.send(poke);
+    // Find the Pokemon
+    const { id } = req.params;
+    const { name } = req.body;
+
+    // Pokemon.findOne({ id })
+    //     .then(doc => {
+    //         doc.name = name;
+    //         doc.save()
+    //             .then(newDoc => res.send(newDoc));
+    //     }); 
+    
+    Pokemon.findOneAndUpdate(
+        { id }, // query object - find Pokemon to be updated
+        { id, name }, // new object - update Pokemon per the enclosed fields
+        { // options
+            new: true, // return new document
+            runValidators: true // when document is updated, run validators
+        }
+    )
+        .then(doc => res.send(doc)); // once promise has been fulfilled, return back to user
 });
 
 // 'DELETE': TO DELETE A POKEMON FROM THE ARRAY at /pokemon/:id
 app.delete('/pokemon/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const poke = pokemon.find(p => p.id === id);
-    if (!poke) {
-      return res.status(404).send('Pokemon not found!');
-    }
-    const index = pokemon.indexOf(poke);
-    pokemon.splice(index, 1);
-    return res.send(poke);
+    // Find the Pokemon
+    const { id } = req.params;
+
+    // Delete the Pokemon
+    Pokemon.findOneAndRemove({ id })
+        // Send the deleted Pokemon back in response
+        .then(deletedDoc => res.send(deletedDoc))
+
 });
 
 // PORT
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
-  })
+});

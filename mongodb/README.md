@@ -317,11 +317,7 @@ $ db.moves.remove({})
 ```
 
 ### Import JSON
-To import a JSON file:
-```
-$ --jsonArray --db pokedex --collection pokemon --file pokemon.json
-```
-In the folder containingg the data to be imported, use `mongoimport` to import a file (this is installed when MongoDB is installed as part of `brew install mongodb`)
+In the folder containingthe data to be imported, use `mongoimport` to import a file (this is installed when MongoDB is installed as part of `brew install mongodb`)
 
 ```
 $ mongoimport --jsonArray --db pokedex --collection pokemon --file pokemon_json.js
