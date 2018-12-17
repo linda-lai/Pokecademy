@@ -1,5 +1,5 @@
 # Pokecademy
-Using the PokeAPI to practice working with RESTful APIs in JavaScript.
+Using the PokeAPI to practice working client and server side with RESTful APIs in JavaScript.
 
 |[![Linda Lai](client/assets/contributors-linda-lai-70x70.jpg)](https://github.com/linda-lai) |
 |-----------|
@@ -13,7 +13,7 @@ A **RESTful API** is an application program interface (API) that uses HTTP reque
 [![PokéAPI](/client/assets/pokeapi.png)](https://pokeapi.co/)
 
 ### Fetch API
-The ![Fetch API](./fetch-api/) provides an interface for fetching resources (including across the network). It will seem familiar to anyone who has used XMLHttpRequest, but the new API provides a more powerful and flexible feature set.
+The ![Fetch API](./client-fetch/) provides an interface for fetching resources (including across the network). It will seem familiar to anyone who has used XMLHttpRequest, but the new API provides a more powerful and flexible feature set.
 
 ### Express API
 ![Express.js](./express-api/) is a web application framework for Node.js is designed for building web applications and APIs. It has been called the de facto standard server framework for Node.js.
