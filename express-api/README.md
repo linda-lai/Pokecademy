@@ -1,5 +1,4 @@
 # Express API
-
 To create a new project in npm for Express:
 
 ```terminal
@@ -27,7 +26,7 @@ Add API details:
 Install Express as a dependency, this will create `nodule_modules/` folder and other npm dependencies:
 
 ```terminal
-npm install express --save
+$ npm install express --save
 ```
 
 As entry point is set to `app.js`, this will be the initialiser for the function. Include Express library by calling it in using `'require'`, searches `node_modules/` folder and Express returns a function which we can call to create a new instance of an Express app:
