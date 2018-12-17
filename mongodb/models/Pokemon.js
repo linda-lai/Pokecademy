@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-// Like Joi, Mongoose needs to know what type and kind of data to expect:
-// pokemonSchema will need to be passed an object matching the schema
+// Like Joi, Mongoose needs to know what type and kind of data to expect
+// pokemonSchema must be passed an object matching the schema
 const pokemonSchema = new mongoose.Schema({
   id: Number,
   name: String
