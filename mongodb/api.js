@@ -6,7 +6,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 
 // MONGOOSE
-mongoose.connect('mongodb://localhost:27017/pokedex');
+mongoose.connect('mongodb://localhost:27017/mongoose');
 const Pokemon = require('./models/Pokemon');
 
 // APP INSTANCE & ENVIRONMENT VARIABLES
@@ -88,4 +88,4 @@ app.delete('/pokemon/:id', (req, res) => {
 // PORT
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
-  })
+});
